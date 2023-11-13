@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    background-color: #20214f;
+    color: #fff;
+    padding: 10px;
+    margin: 0;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    background-color: #4b0082;
+    padding: 10px 0;
+    height: 40px;
+    margin-bottom: 20px;
+    list-style: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline;
+    margin: 10px 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.menu a:hover {
+    background-color: #8a2be2;
+    
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.text {
+    flex: 1;
+}
+
+.text h2,
+.text p {
+    margin: 0;
+}
+
+.image {
+    flex: 1;
+    text-align: center;
+}
+
+.image img {
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.image .cardnew {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    box-sizing: border-box;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}

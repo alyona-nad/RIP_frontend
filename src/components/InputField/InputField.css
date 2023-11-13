@@ -1,0 +1,14 @@
+.inputField {
+    display: flex;
+    padding: 12px 0;
+}
+.inputField > input {
+    width: 200px;
+    border: 2px solid black;
+    border-radius: none;
+    outline: none;
+}
+
+.btn {
+    border-radius: none;
+}

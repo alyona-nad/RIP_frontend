@@ -21,8 +21,8 @@ const ITunesPage: FC = () => {
 const fetchData = async () => {
     try {
       const url = currentFilter
-        ? `http://127.0.0.1:8080/list_of_colorants?filterValue=${currentFilter}`
-        : 'http://127.0.0.1:8080/list_of_colorants';
+        ? `http://localhost:8080/list_of_colorants?filterValue=${currentFilter}`
+        : 'http://localhost:8080/list_of_colorants';
 
       const response = await fetch(url);
 

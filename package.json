@@ -1,6 +1,7 @@
 {
   "name": "my-app",
-  "homepage": "https://alyona-nad.github.io/RIP_frontend",
+ 
+ "homepage": "https://alyona-nad.github.io/RIP_frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",

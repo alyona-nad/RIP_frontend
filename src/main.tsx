@@ -9,11 +9,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Colorants from './components/Colorant/Colorant.tsx'
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/RIP_frontend/',
     element: <ITunesPage /*currentFilter ='' services={[]}*/></ITunesPage>
   },
   {
-    path: '/colorants/:id',
+    path: '/RIP_frontend/colorants/:id',
     element:<Colorants Name="" Image='' ID_Colorant={0} Description='' Properties='' Link='' Status=''></Colorants>
 
   }

@@ -1,18 +1,19 @@
 import { FC, useState, useEffect } from 'react'
-import { Col, Row, Spinner } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 import MusicCard from '../components/MusicCard/MusicCard'
 import  InputField from '../components/InputField/InputField'
 import { Link } from 'react-router-dom';
-import {colorants as Colorants} from "../model.tsx"
+import {IColorant,colorants as Colorants} from "../model.tsx"
+
 
 const ITunesPage: FC = () => {
     const [loading, setLoading] = useState(true)
-    const [music, setMusic] = useState([])
+    const [music, setMusic] = useState<IColorant[]>([])
     const [currentFilter, setCurrentFilter] = useState('') // Добавляем состояние для значения поиска
 
-    const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    /*const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentFilter(e.target.value)
-        };
+        };*/
         
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()}

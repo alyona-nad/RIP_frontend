@@ -5,7 +5,7 @@ import './InputField.css'
 interface Props {
     value: string
     setValue: (value: string) => void
-    onSubmit: () => void
+    onSubmit?: () => void
     loading?: boolean
     placeholder?: string
     buttonTitle?: string
@@ -17,5 +17,6 @@ const InputField: FC<Props> = ({ value, setValue, onSubmit, loading, placeholder
         <Button disabled={loading} onClick={onSubmit}>{buttonTitle}</Button>
     </div>
 )
+    
 
 export default InputField

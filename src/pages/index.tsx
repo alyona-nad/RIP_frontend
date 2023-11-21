@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { Navbar, Breadcrumb } from 'react-bootstrap';
 
 const Home = () => {
@@ -16,4 +16,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home;*/

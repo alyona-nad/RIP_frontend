@@ -1,8 +1,8 @@
 import { FC, useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import { useParams,Link } from 'react-router-dom';
-import { colorants as defaultColorants } from "/src/model.tsx"
-interface Props {
+import { IColorant, colorants as defaultColorants } from "../../model.tsx"
+/*interface Props {
   Name: string;
   Image: string;
   ID_Colorant: number;
@@ -10,9 +10,9 @@ interface Props {
   Properties: string;
   onSubmit: () => void;
 }
-
-const Colorants: FC<Props> = ({ ID_Colorant }) => {
-  const [colorant, setColorant] = useState<Props | null>(null);
+*/
+const Colorants: FC<IColorant> = () => {
+  const [colorant, setColorant] = useState<IColorant | null>(null);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Colorants: FC<Props> = ({ ID_Colorant }) => {
         if (!response.ok) {
           throw new Error('Ошибка при получении данных');
         }
-        const colorantData: Props = await response.json();
+        const colorantData: IColorant = await response.json();
         setColorant(colorantData);
       } catch (error) {
         console.error('Ошибка:', error);

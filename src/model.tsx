@@ -1,4 +1,4 @@
-interface IColorant {
+export interface IColorant {
     Name: string
     Image: string
     ID_Colorant: number

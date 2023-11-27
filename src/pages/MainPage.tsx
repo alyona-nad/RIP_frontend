@@ -1,12 +1,12 @@
 import { FC, useState, useEffect } from 'react'
 import { Col, Row } from 'react-bootstrap'
-import MusicCard from '../components/MusicCard/MusicCard'
-import  InputField from '../components/InputField/InputField'
+import MusicCard from '../components/ColorantCard/ColorantCard.tsx'
+import  InputField from '../components/InputField/InputField.tsx'
 import { Link } from 'react-router-dom';
 import {IColorant,colorants as Colorants} from "../model.tsx"
 
 
-const ITunesPage: FC = () => {
+const MainPage: FC = () => {
     const [loading, setLoading] = useState(true)
     const [music, setMusic] = useState<IColorant[]>([])
     const [currentFilter, setCurrentFilter] = useState('') // Добавляем состояние для значения поиска
@@ -22,8 +22,8 @@ const ITunesPage: FC = () => {
 const fetchData = async () => {
     try {
       const url = currentFilter
-        ? `http://localhost:8080/list_of_colorants?filterValue=${currentFilter}`
-        : 'http://localhost:8080/list_of_colorants';
+        ? `api/list_of_colorants?filterValue=${currentFilter}`
+        : 'api/list_of_colorants';
 
       const response = await fetch(url);
 
@@ -47,7 +47,7 @@ const fetchData = async () => {
     return (
         <div className="" style={{  width: '1220px'}}>
             <div className="breadcrumbs" style={{ marginLeft: 0 }}>
-        <Link to="/">Каталог</Link>
+        <Link to="/RIP_frontend/">Каталог</Link>
       </div>
        {/*<div className="containernew">*/}
             
@@ -75,5 +75,5 @@ const fetchData = async () => {
 }
 
 
-export default ITunesPage
+export default MainPage
 

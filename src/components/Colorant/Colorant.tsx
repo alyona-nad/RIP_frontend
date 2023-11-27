@@ -18,7 +18,7 @@ const Colorants: FC<IColorant> = () => {
   useEffect(() => {
     const fetchColorant = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8080/product/${id}`);
+        const response = await fetch(`api/colorants/${id}`);
         if (!response.ok) {
           throw new Error('Ошибка при получении данных');
         }
@@ -48,7 +48,7 @@ const Colorants: FC<IColorant> = () => {
     
       <Card.Body>
         <div className="breadcrumbs">
-        <Link to="/">Каталог</Link>/<Link to="/colorants:id'">{colorant.Name}</Link>
+        <Link to="/RIP_frontend/">Каталог</Link>/<Link to="/RIP_frontend/colorants/:id'">{colorant.Name}</Link>
       </div>
         <div className="container">
         <h2>{colorant.Name}</h2>

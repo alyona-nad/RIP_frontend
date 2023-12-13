@@ -15,6 +15,7 @@ export default defineConfig({
 },
   base: "/RIP_frontend/",
   plugins: [react()],
+  
 })
 /*
 import { defineConfig } from 'vite'

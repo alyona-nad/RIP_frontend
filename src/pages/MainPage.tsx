@@ -47,7 +47,7 @@ const fetchData = async () => {
     return (
         <div className="" style={{  width: '1220px'}}>
             <div className="breadcrumbs" style={{ marginLeft: 0 }}>
-        <Link to="/RIP_frontend/">Каталог</Link>
+        <Link to="/RIP_frontend/list_of_colorants">Каталог</Link>
       </div>
        {/*<div className="containernew">*/}
             

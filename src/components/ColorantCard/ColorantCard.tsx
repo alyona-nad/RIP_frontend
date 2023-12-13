@@ -14,7 +14,7 @@ interface Props {
 const MusicCard: FC<Props> = ({ Name, Image, ID_Colorant}) => (
     <Card className="containernew">
         <div className='card'> 
-      <a href={`/RIP_frontend/colorants/${ID_Colorant}`}>
+      <a href={`/RIP_frontend/${ID_Colorant}`}>
             <img src={Image}  alt="{Name}"/>
             <h3>{ Name}</h3>
             </a>    

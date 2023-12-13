@@ -12,7 +12,7 @@ const App: React.FC = () => {
             <BasicExample></BasicExample>
             <Routes>
                 <Route path="/RIP_frontend/" element={<MainPage/>}/>
-                <Route path="/RIP_frontend/colorants/:id" element={<Colorants Name="" Image='' ID_Colorant={0} Description='' Properties='' Link='' Status=''/>}/>
+                <Route path="/RIP_frontend/:id" element={<Colorants Name="" Image='' ID_Colorant={0} Description='' Properties='' Link='' Status=''/>}/>
             </Routes>
         </HashRouter>
 

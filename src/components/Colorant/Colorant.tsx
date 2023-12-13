@@ -18,7 +18,7 @@ const Colorants: FC<IColorant> = () => {
   useEffect(() => {
     const fetchColorant = async () => {
       try {
-        const response = await fetch(`api/colorants/${id}`);
+        const response = await fetch(`api/${id}`);
         if (!response.ok) {
           throw new Error('Ошибка при получении данных');
         }
@@ -40,15 +40,15 @@ const Colorants: FC<IColorant> = () => {
     }
   }, [id]);
 
-  if (!colorant) {
+  /*if (!colorant) {
     return <div>Нет доступных данных.</div>;
-  }
-
+  }*/
+  if (colorant!=null) {
   return (
     
       <Card.Body>
         <div className="breadcrumbs">
-        <Link to="/RIP_frontend/">Каталог</Link>/<Link to="/RIP_frontend/colorants/:id'">{colorant.Name}</Link>
+        <Link to="/RIP_frontend/list_of_colorants">Каталог</Link>/<Link to="/RIP_frontend/:id'">{colorant.Name}</Link>
       </div>
         <div className="container">
         <h2>{colorant.Name}</h2>
@@ -64,7 +64,7 @@ const Colorants: FC<IColorant> = () => {
         </div>
       </Card.Body>
     
-  );
+  );}
 };
 
 export default Colorants;

@@ -48,7 +48,7 @@ const Colorants: FC<IColorant> = () => {
     
       <Card.Body>
         <div className="breadcrumbs">
-        <Link to="/RIP_frontend/list_of_colorants">Каталог</Link>/<Link to="/RIP_frontend/:id'">{colorant.Name}</Link>
+        <Link to="/RIP_frontend/">Каталог</Link>/<Link to="/RIP_frontend/:id'">{colorant.Name}</Link>
       </div>
         <div className="container">
         <h2>{colorant.Name}</h2>

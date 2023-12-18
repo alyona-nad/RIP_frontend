@@ -11,27 +11,10 @@ const MainPage: FC = () => {
     const [music, setMusic] = useState<IColorant[]>([])
     const [currentFilter, setCurrentFilter] = useState('') // Добавляем состояние для значения поиска
 
-    /*const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCurrentFilter(e.target.value)
-        };*/
         
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()}
-       /* const fetchData = async (currentFilter?: string) => {
-            try {
-                const url = currentFilter ? `/api/consultations?filterValue=${currentFilter}` : 'api/list_of_colorants';
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`Ошибка при выполнении запроса: ${response.statusText}`);
-                }
-    
-                const result = await response.json();
-                console.log(result); // Проверьте, что данные приходят корректно
-                setData(result);
-            } catch (error) {
-                console.error('ошибка при выполннении запроса:', error);
-            }
-        };*/
+       
     useEffect(() => {
 const fetchData = async () => {
     try {
@@ -52,7 +35,7 @@ const fetchData = async () => {
       console.error('Ошибка:', error);
       if (currentFilter!="")
       {
-        const filteredMusic = music.filter((item) =>
+        const filteredMusic = Colorants.filter((item) =>
                     item.Name.toLowerCase().includes(currentFilter.toLowerCase())
                 );
                 setMusic(filteredMusic);
@@ -65,37 +48,7 @@ const fetchData = async () => {
 
   fetchData();
 }, [currentFilter]);
-/*useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const url = currentFilter
-                ? `api/list_of_colorants?filterValue=${currentFilter}`
-                : 'api/list_of_colorants';
 
-            const response = await fetch(url);
-
-            if (!response.ok) {
-                throw new Error('Ошибка при получении данных');
-            }
-
-            const data = await response.json();
-            setMusic(data.Colorants);
-            setLoading(false);
-        } catch (error) {
-            console.error('Ошибка:', error);
-
-            // Use frontend backup filter when backend filtering fails
-            const filteredMusic = music.filter((item) =>
-                item.Name.toLowerCase().includes(currentFilter.toLowerCase())
-            );
-
-            setMusic(filteredMusic);
-            setLoading(false);
-        }
-    };
-
-    fetchData();
-}, [currentFilter, music]);*/
     return (
         <div className="" style={{  width: '1220px'}}>
             <div className="breadcrumbs" style={{ marginLeft: 0 }}>

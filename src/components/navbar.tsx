@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/auth/authActions';
 import React, { useState, useEffect } from 'react';
 import { RootState } from '../redux/store';
+import { useNavigate } from 'react-router-dom';
 
 function BasicExample() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     loggedIn: isAuthenticated,
     name: localStorage.getItem("name") || "",
@@ -22,6 +24,7 @@ function BasicExample() {
 
     try {
       await dispatch(logout());
+      navigate('/RIP_frontend/');
     } catch (error) {
       console.error("Error during logout:", error);
     }

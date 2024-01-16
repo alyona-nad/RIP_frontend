@@ -19,7 +19,7 @@ const App: React.FC = () => {
                 <Route path="/RIP_frontend/:id" element={<Colorants Name="" Image='' ID_Colorant={0} Description='' Properties='' Link='' Status=''/>}/>
                 <Route path="/RIP_frontend/login" element={<LoginPage />} />
                 <Route path="/RIP_frontend/registration" element={<RegistrationPage />} />
-                <Route path="/RIP_frontend/BasketPage" element={<BasketPage />} />
+                <Route path="/RIP_frontend/BasketPage/:id" element={<BasketPage />} />
             </Routes>
         </HashRouter>
 

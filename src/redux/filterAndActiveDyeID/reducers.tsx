@@ -1,8 +1,8 @@
 import { combineReducers, AnyAction } from 'redux';
 import {
   SET_ACTIVE_DYE_ID,
-  //SET_MAX_PRICE_FILTER,
-  //SET_NUM_OF_PROD_IN_REQ,
+  SET_FILTER,
+  SET_NUM_OF_col_IN_Dye,
 } from './actions';
 
 const activeDyeIDReducer = (state: number | null = null, action: AnyAction) => {
@@ -14,26 +14,26 @@ const activeDyeIDReducer = (state: number | null = null, action: AnyAction) => {
   }
 };
 
-/*const maxPriceFilterReducer = (state: string | '' = '', action: AnyAction) => {
+const FilterReducer = (state: string | '' = '', action: AnyAction) => {
   switch (action.type) {
-    case SET_MAX_PRICE_FILTER:
+    case SET_FILTER:
       return action.payload;
     default:
       return state;
   }
 };
 
-const numOfConsReducer = (state: number | 0 = 0, action: AnyAction) => {
+const numOfColReducer = (state: number | 0 = 0, action: AnyAction) => {
   switch (action.type) {
-    case SET_NUM_OF_PROD_IN_REQ:
+    case SET_NUM_OF_col_IN_Dye:
       return action.payload;
     default:
       return state;
   }
-};*/
+};
 
 export const filterAndActiveIdReducer = combineReducers({
   activeDyeID: activeDyeIDReducer,
-  //maxPriceFilter: maxPriceFilterReducer,
-  //numOfCons: numOfConsReducer,
+  Filter: FilterReducer,
+  numOfCol: numOfColReducer,
 });

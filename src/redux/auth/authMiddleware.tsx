@@ -23,8 +23,8 @@ const authMiddleware: Middleware = (store) => (next) => async (action) => {
                 const token = response.data.access_token;
                 localStorage.setItem("accessToken", token);
                 store.dispatch(setRole(response.data.role))
-                const updatedNumOfCons = 0;
-                localStorage.setItem('numOfCons', updatedNumOfCons.toString());
+                const updatedNumOfCol = 0;
+                localStorage.setItem('numOfCol', updatedNumOfCol.toString());
             } else {
                 console.log('loginFailure');
                 store.dispatch(loginFailure());
@@ -48,7 +48,7 @@ const authMiddleware: Middleware = (store) => (next) => async (action) => {
                 console.log('logoutSuccess');
                 store.dispatch(loginFailure());
                 localStorage.removeItem("accessToken"); // Удаляем токен из локального хранилища
-                localStorage.removeItem("numOfCons");
+                localStorage.removeItem("numOfCol");
             } else {
                 console.log('logoutFailure');
                 // Может потребоваться диспатчить дополнительные действия в случае неудачного выхода
@@ -79,8 +79,8 @@ const authMiddleware: Middleware = (store) => (next) => async (action) => {
                 const token = response.data.access_token;
                 localStorage.setItem("accessToken", token);
                 store.dispatch(setRole(response.data.role))
-                const updatedNumOfCons = 0;
-                localStorage.setItem('numOfCons', updatedNumOfCons.toString());
+                const updatedNumOfCol = 0;
+                localStorage.setItem('numOfCol', updatedNumOfCol.toString());
             } else {
                 store.dispatch(loginFailure()); // Dispatch your failure action
             }

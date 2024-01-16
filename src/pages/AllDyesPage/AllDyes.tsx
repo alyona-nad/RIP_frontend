@@ -56,6 +56,7 @@ const AllDyesPage = () => {
               <th key={'endDate'}>Закончена</th>
               <th key={'Price'}>Цена</th>
               <th key={'name'}>Название</th>
+              <th key={'more'}>Подробнее</th>
             </tr>
           </thead>
           <tbody>
@@ -66,6 +67,7 @@ const AllDyesPage = () => {
                 <td>{formattedTime(dye.CompletionDate)}</td>
                 <td>{dye.Price}</td>
                 <td>{dye.Name}</td>
+                <td><Link to={`/RIP_frontend/BasketPage/${dye.ID_Dye}`}>Подробнее</Link></td>
               </tr>
             ))}
           </tbody>

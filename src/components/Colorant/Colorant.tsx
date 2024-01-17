@@ -3,93 +3,12 @@ import { Card } from 'react-bootstrap';
 import { useParams,Link } from 'react-router-dom';
 import { IColorant, colorants as defaultColorants } from "../../model.tsx"
 import MoreAboutColorant from '../MoreAboutColorant/MoreAboutColorant.tsx'
-/*interface Props {
-  Name: string;
-  Image: string;
-  ID_Colorant: number;
-  Description: string;
-  Properties: string;
-  onSubmit: () => void;
-}
-*/
+
 const Colorants: FC<IColorant> = () => {
   const [colorant, setColorant] = useState<IColorant | null>(null);
   const { id } = useParams<{ id: string }>();
  
-  //const [colorant, setColorant] = useState<IColorant[]>([])
- /* useEffect(() => {
-    const fetchColorant = async () => {
-      try {
-        const response = await fetch(`api/${id}`);
-        console.log(response.status) 
-        if (!response.ok) {
-          console.log('Ошибка2')
-          throw new Error('Ошибка при получении данных');
-        }
-        const contentType = response.headers.get("content-type");
-
-  if (!contentType || !contentType.includes("application/json")) {
-    console.log('Ошибка: Неверный тип содержимого', contentType);
-    throw new Error('Неверный тип содержимого');
-  }
-
-  //const data = await response.json();
-  const data = JSON.parse(await response.text());
-  console.log('Данные:', data);
-  setColorant(data);
-  console.log(data)
-        //const colorantData: IColorant = await response.json();
-        
-        //setColorant(colorantData);
-      } catch (error) {
-        console.error('Ошибка:', error);
-        const defaultColorant = defaultColorants.find((item) => item.ID_Colorant === Number(id));
-        if (defaultColorant) {
-          setColorant(defaultColorant);
-        } else {
-          console.error('Цвет не найден в models.tsx');
-        }
-      }
-    };*/
-/*
-    useEffect(() => {
-      const fetchColorant = async () => {
-        try {
-          const response = await fetch(`api/${id}`);
-          console.log(response.status);
   
-          if (!response.ok) {
-            console.log('Ошибка2');
-            throw new Error('Ошибка при получении данных');
-          }
-  
-          const contentType = response.headers.get("content-type");
-  
-          if (!contentType || !contentType.includes("application/json")) {
-            console.log('Ошибка: Неверный тип содержимого', contentType);
-            throw new Error('Неверный тип содержимого');
-          }
-  
-          const data = JSON.parse(await response.text());
-          console.log('Данные:', data);
-          setColorant(data);
-  
-        } catch (error) {
-          console.error('Ошибка:', error);
-          const defaultColorant = defaultColorants.find((item) => item.ID_Colorant === Number(id));
-          if (defaultColorant) {
-            setColorant(defaultColorant);
-          } else {
-            console.error('Цвет не найден в models.tsx');
-          }
-        }
-      };
-
-    if (id) {
-      fetchColorant();
-    }
-  }, [id]);
-*/
 useEffect(() => {
   const fetchColorant = async () => {
     try {

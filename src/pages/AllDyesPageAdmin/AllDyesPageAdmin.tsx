@@ -36,7 +36,7 @@ const AllRequestsAdminPage = () => {
   const status = useSelector((state: RootState) => state.dyeFilters.status);
   const user = useSelector((state: RootState) => state.dyeFilters.user);
   const [localUser, setLocalUser] = useState(user);
-  const [requests, setRequests] = useState<Data[] | null>(null);
+  const [dyes, setDyes] = useState<Data[] | null>(null);
 
   useEffect(() => {
     setLocalUser(user);
@@ -102,7 +102,7 @@ const fetchData = async (
         result?.filter((item: Data) => item.User.Name.includes(localUser)) || result;
     }
     console.log(filteredResult);
-    setRequests(filteredResult);
+    setDyes(filteredResult);
   } catch (error) {
     console.error('Ошибка при выполнении запроса:', error);
   }
@@ -166,9 +166,9 @@ const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
   useEffect(() => {
     if (localUser !== '') {
-      const previos = requests;
-      setRequests(
-        requests?.filter((item: Data) => item.User.Name.includes(localUser)) || previos
+      const previos = dyes;
+      setDyes(
+        dyes?.filter((item: Data) => item.User.Name.includes(localUser)) || previos
       );
     }
   }, [localUser]);
@@ -239,7 +239,7 @@ const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             Сбросить фильтры
           </Button>
         </div>
-        {requests?.length === 0 ? (
+        {dyes?.length === 0 ? (
           <h1 className="small-h1" style={{ marginTop: '5%' }}>
             Нет данных, которые соответствуют фильтрам
           </h1>
@@ -261,26 +261,26 @@ const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                 </tr>
               </thead>
               <tbody>
-                {requests?.map((request, index) => (
+                {dyes?.map((dye, index) => (
                   <tr key={index}>
                     <td>
-                  {request.User.Name}
+                  {dye.User.Name}
                 </td>
                 <td>
-                  {request.ModeratorUser.Name}
+                  {dye.ModeratorUser.Name}
                 </td>
-                <td>{request.Status}</td>
-                <td>{formattedTime(request.FormationDate)}</td>
-                <td>{formattedTime(request.CompletionDate)}</td>
-                <td>{request.Price}</td>
-                <td>{request.Name}</td>
+                <td>{dye.Status}</td>
+                <td>{formattedTime(dye.FormationDate)}</td>
+                <td>{formattedTime(dye.CompletionDate)}</td>
+                <td>{dye.Price}</td>
+                <td>{dye.Name}</td>
                 
-                    {request.Status === 'ended' || request.Status === 'reject' ? (
+                    {dye.Status === 'ended' || dye.Status === 'reject' ? (
                       <>
                         <td>Заявка закончена</td>
                         <td>Заявка закончена</td>
                         <td>
-                          <Link to={`/RIP_frontend/BasketPage/${request.ID_Dye}`}>
+                          <Link to={`/RIP_frontend/BasketPage/${dye.ID_Dye}`}>
                             Подробнее
                           </Link>
                         </td>
@@ -291,7 +291,7 @@ const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                           <Button
                             variant="primary"
                             onClick={() => {
-                              handleChangeStatus(request.ID_Dye, 'ended');
+                              handleChangeStatus(dye.ID_Dye, 'ended');
                             }}
                           >
                             Закончить
@@ -301,14 +301,14 @@ const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                           <Button
                             variant="danger"
                             onClick={() => {
-                              handleChangeStatus(request.ID_Dye, 'reject');
+                              handleChangeStatus(dye.ID_Dye, 'reject');
                             }}
                           >
                             Отменить
                           </Button>
                         </td>
                         <td>
-                          <Link to={`/RIP_frontend/BasketPage/${request.ID_Dye}`}>
+                          <Link to={`/RIP_frontend/BasketPage/${dye.ID_Dye}`}>
                             Подробнее
                           </Link>
                         </td>

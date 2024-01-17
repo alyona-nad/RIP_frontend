@@ -169,7 +169,7 @@ const BasketPage: React.FC = () => {
         <div style={{ marginTop: '10px'}}></div>
           {id_Dye === localStorage.getItem("ActiveDyeId") && (
             <>
-              <Button variant="primary" onClick={handleSend}>
+              <Button variant="primary" onClick={handleConfirmSend}>
                 Отправить
               </Button>
               <Button style={{ marginLeft: '70%' }} variant="danger" onClick={handleDeleteCart}>
@@ -177,22 +177,7 @@ const BasketPage: React.FC = () => {
               </Button>
             </>
           )}
-        <Modal show={showModal} onHide={handleModalClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Подтверждение отправки</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            Вы уверены, что хотите отправить данные?
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleModalClose}>
-              Закрыть
-            </Button>
-            <Button variant="primary" onClick={handleConfirmSend}>
-              Отправить
-            </Button>
-          </Modal.Footer>
-            </Modal>
+        
             
       </>
     );

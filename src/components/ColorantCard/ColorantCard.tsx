@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Card, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import './ColorantCard.css'
 interface Props {
     Name: string
@@ -15,10 +16,10 @@ interface Props {
 const MusicCard: React.FC<Props> = ({ Name, Image, ID_Colorant, onAdd }) => (
     <Card className="containernew">
       <div className='card'>
-        <a href={`/RIP_frontend/${ID_Colorant}`}>
-          <img src={Image} alt={Name} />
-          <h3>{Name}</h3>
-        </a>
+      <Link to={`/RIP_frontend/${ID_Colorant}`}>
+  <img src={Image} alt={Name} />
+  <h3>{Name}</h3>
+</Link>
       </div>
       {window.localStorage.getItem("accessToken") ? (
               <Button variant="primary" onClick={() => onAdd(ID_Colorant)}>Добавить</Button>

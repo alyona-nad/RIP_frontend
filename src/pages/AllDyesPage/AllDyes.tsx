@@ -326,7 +326,7 @@ const AllDyesPage = () => {
       dispatch(getAllDyes());
     };
 
-    const pollingInterval = setInterval(fetchData, 2000); // опрос каждые 2000 миллисекунд (2 секунды)
+    const pollingInterval = setInterval(fetchData, 2000); 
 
     fetchData(); // сделать первый запрос сразу
 

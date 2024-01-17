@@ -9,3 +9,4 @@ export const register = createAction<{ userName: string; userLogin: string;
    email: string; phoneNumber: string; password: string }>(
   "/auth/register"
 );
+export const updateUserInfo = createAction<string>("/auth/updateUserInfo"); // Добавлено

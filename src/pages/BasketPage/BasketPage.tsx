@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import CartItem from '../../components/CardItem/CardItem';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal,Form } from 'react-bootstrap';
 import axios from 'axios';
 import { Col, Row } from 'react-bootstrap'
 import { useDispatch,useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import DyeCard from '../../components/DyeItem/DyeItem';
 import { useParams,Link } from 'react-router-dom';
+import { RootState } from '../../redux/store';
 
 interface CartItem {
   ID_Colorant: number;
@@ -26,6 +27,7 @@ const BasketPage: React.FC = () => {
   const [loading, setLoading] = useState(true); 
   const actualId: string = id_Dye || "";
   const isMatchingId = id_Dye === localStorage.getItem("ActiveDyeId");
+  const role = useSelector((state: RootState) => state.auth.role)
   const handleDelete = async (id1: number) => {
     try {
       await axios.delete(`/api/delete-MtM/${localStorage.getItem("ActiveDyeId")}/colorant/${id1}`, {
@@ -115,10 +117,13 @@ const BasketPage: React.FC = () => {
   const renderBreadcrumbs = (actualId: string | undefined) => {
     const catalogLink = <Link to="/RIP_frontend/">Каталог</Link>;
     const dyesLink = <Link to="/RIP_frontend/dyes">Заявки</Link>;
+    const dyesLinkAdmin = <Link to="/RIP_frontend/dyesAdmin">Заявки</Link>;
     const basketLink = <Link to="/RIP_frontend/BasketPage">Корзина</Link>;
-  
+    const catalogLinkAdmin = <Link to="/RIP_frontend/AdminMainPage">Каталог</Link>;
+  if(role===1){
     return (
       <div className="breadcrumbs">
+        
         {actualId === localStorage.getItem("ActiveDyeId") ? (
           <>
             {catalogLink}/{basketLink}
@@ -129,7 +134,22 @@ const BasketPage: React.FC = () => {
           </>
         )}
       </div>
-    );
+    );} else if (role===2) {
+      return (
+        <div className="breadcrumbs">
+          
+          {actualId === localStorage.getItem("ActiveDyeId") ? (
+            <>
+              {catalogLinkAdmin}/{basketLink}
+            </>
+          ) : (
+            <>
+              {catalogLinkAdmin}/{dyesLinkAdmin}/{basketLink}
+            </>
+          )}
+        </div>
+      );
+    }
   };
 
   const renderCart = () => {
@@ -173,11 +193,13 @@ const BasketPage: React.FC = () => {
             </Button>
           </Modal.Footer>
             </Modal>
+            
       </>
     );
   };
 
   const renderEmptyCart = () => {
+    if (role===1) {
     return (
       <>
       <div className="breadcrumbs">
@@ -187,7 +209,18 @@ const BasketPage: React.FC = () => {
         <h2>Корзина пуста</h2>
       </div>
       </>
-    );
+    );} else if (role===2){
+      return (
+        <>
+        <div className="breadcrumbs">
+          <Link to="/RIP_frontend/AdminMainPage">Каталог</Link>/<Link to="/RIP_frontend/BasketPage">Корзина</Link>
+        </div>
+        <div style={{ 'marginTop': '5%', 'marginLeft': '5%', 'marginRight': '5%' }}>
+          <h2>Корзина пуста</h2>
+        </div>
+        </>
+      );
+    }
   };
 
   return (

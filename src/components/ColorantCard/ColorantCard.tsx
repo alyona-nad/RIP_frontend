@@ -11,20 +11,7 @@ interface Props {
 }
 
 
-/*
-const MusicCard: React.FC<Props> = ({ Name, Image, ID_Colorant}) => (
-    
-    <Card className="containernew">
-        <div className='card'> 
-      <a href={`/RIP_frontend/${ID_Colorant}`}>
-            <img src={Image}  alt="{Name}"/>
-            <h3>{ Name}</h3>
-            </a>    
-        </div>
-    </Card>
-)
 
-export default MusicCard;*/
 const MusicCard: React.FC<Props> = ({ Name, Image, ID_Colorant, onAdd }) => (
     <Card className="containernew">
       <div className='card'>
@@ -32,7 +19,6 @@ const MusicCard: React.FC<Props> = ({ Name, Image, ID_Colorant, onAdd }) => (
           <img src={Image} alt={Name} />
           <h3>{Name}</h3>
         </a>
-        {/* Кнопка "Добавить" под карточкой */}
       </div>
       {window.localStorage.getItem("accessToken") ? (
               <Button variant="primary" onClick={() => onAdd(ID_Colorant)}>Добавить</Button>

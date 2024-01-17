@@ -1,6 +1,6 @@
 import { Middleware } from "redux";
 import { login, logout, register } from "./authActions";
-import { loginSuccess, loginFailure, setRole } from "./authSlice";
+import { loginSuccess, loginFailure, setRole,updateUserInfo } from "./authSlice";
 import axios from "axios";
 
 const API_BASE_URL = "/api";
@@ -20,8 +20,11 @@ const authMiddleware: Middleware = (store) => (next) => async (action) => {
             if (response.status === 200) {
                 console.log('loginSuccess');
                 store.dispatch(loginSuccess());
+
+                store.dispatch(updateUserInfo(response.data.name))
                 const token = response.data.access_token;
                 localStorage.setItem("accessToken", token);
+                
                 store.dispatch(setRole(response.data.role))
                 const updatedNumOfCol = 0;
                 localStorage.setItem('numOfCol', updatedNumOfCol.toString());
@@ -49,6 +52,7 @@ const authMiddleware: Middleware = (store) => (next) => async (action) => {
                 store.dispatch(loginFailure());
                 localStorage.removeItem("accessToken"); // Удаляем токен из локального хранилища
                 localStorage.removeItem("numOfCol");
+                
             } else {
                 console.log('logoutFailure');
                 // Может потребоваться диспатчить дополнительные действия в случае неудачного выхода

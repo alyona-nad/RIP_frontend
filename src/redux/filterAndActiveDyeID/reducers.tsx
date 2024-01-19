@@ -1,7 +1,7 @@
 import { combineReducers, AnyAction } from 'redux';
 import {
   SET_ACTIVE_DYE_ID,
-  SET_FILTER,
+  SET_SEARCH_FILTER,
   SET_NUM_OF_col_IN_Dye,
 } from './actions';
 
@@ -14,9 +14,9 @@ const activeDyeIDReducer = (state: number | null = null, action: AnyAction) => {
   }
 };
 
-const FilterReducer = (state: string | '' = '', action: AnyAction) => {
+const SearchFilterReducer = (state: string | '' = '', action: AnyAction) => {
   switch (action.type) {
-    case SET_FILTER:
+    case SET_SEARCH_FILTER:
       return action.payload;
     default:
       return state;
@@ -34,6 +34,6 @@ const numOfColReducer = (state: number | 0 = 0, action: AnyAction) => {
 
 export const filterAndActiveIdReducer = combineReducers({
   activeDyeID: activeDyeIDReducer,
-  Filter: FilterReducer,
+  SearchFilter: SearchFilterReducer,
   numOfCol: numOfColReducer,
 });

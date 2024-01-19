@@ -166,6 +166,7 @@ const LoginPage = () => {
                     {error && <div className="error-message">{error}</div>}
                     <Button 
                     variant="primary" 
+                    style={{ color: '#007bff', backgroundColor: '#fff', borderColor: '#007bff'}}
                     type="button"
                     onClick={() => handleLogin(userLogin, password)}>
                         Войти

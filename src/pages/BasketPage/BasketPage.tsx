@@ -47,7 +47,18 @@ const BasketPage: React.FC = () => {
   }, [id_Dye]);
 
   const fetchData = async (dyeId: string ) => {
+    if ( actualId!="0") {
     try {
+      console.log("actualId",actualId);
+      if (actualId==="" ) {
+        // Если нет активной краски, перенаправляем на другую страницу (например, главную)
+        if(role!=2) {
+          navigate("/RIP_frontend/");} else {
+            navigate("/RIP_frontend/AdminMainPage")
+          }
+          
+      }
+      
       const response = await axios.get(`/api/dye/${dyeId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -60,6 +71,12 @@ const BasketPage: React.FC = () => {
       console.error('Error fetching data:', error);
       setLoading(false); 
     }
+  } else {
+    if(role!=2) {
+      navigate("/RIP_frontend/");} else {
+        navigate("/RIP_frontend/AdminMainPage")
+      }
+  }
   };
 
 
@@ -70,19 +87,16 @@ const BasketPage: React.FC = () => {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       });
-      navigate("/RIP_frontend/");
+      if(role!=2) {
+      navigate("/RIP_frontend/");} else {
+        navigate("/RIP_frontend/AdminMainPage")
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-  const handleSend = () => {
-    setShowModal(true);
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
-  };
+  
 
   const handleConfirmSend = async () => {
     try {
@@ -98,6 +112,10 @@ const BasketPage: React.FC = () => {
           const activeDyeId = localStorage.getItem("ActiveDyeId")
           const ActiveDyeId: number = parseInt(activeDyeId ?? "0", 10)
           console.log(ActiveDyeId)
+          if(role!=2) {
+            navigate("/RIP_frontend/");} else {
+              navigate("/RIP_frontend/AdminMainPage")
+            }
         await axios.post(
             'http://localhost:5000/',  
             {
@@ -105,8 +123,8 @@ const BasketPage: React.FC = () => {
              
             }
           );
-        setShowModal(false);
-        navigate("/RIP_frontend/")
+        //setShowModal(false);
+        
       } catch (error) {
         setError('Ошибка при отправке формы. Попробуйте позже')
         console.error('Error fetching data:', error);
@@ -120,7 +138,7 @@ const BasketPage: React.FC = () => {
     const dyesLinkAdmin = <Link to="/RIP_frontend/dyesAdmin">Заявки</Link>;
     const basketLink = <Link to="/RIP_frontend/BasketPage">Корзина</Link>;
     const catalogLinkAdmin = <Link to="/RIP_frontend/AdminMainPage">Каталог</Link>;
-  if(role===1){
+  if(role!=2){
     return (
       <div className="breadcrumbs">
         
@@ -160,7 +178,7 @@ const BasketPage: React.FC = () => {
         <div className="card" style={{ width: '1220px', boxSizing: 'border-box', marginTop: '10px', marginLeft: 0, marginRight: 0 }}>
           <Row xs={4} md={4} className="g-4">
             {cartItems.map((item) => (
-              <Col key={item.ID_Colorant}>
+              <Col  key={item.ID_Colorant} style={{ minWidth: '210px'}}>
                 <DyeCard {...item} onRemove={() => handleDelete(item.ID_Colorant)} isMatchingId={isMatchingId}  />
               </Col>
             ))}
@@ -169,10 +187,10 @@ const BasketPage: React.FC = () => {
         <div style={{ marginTop: '10px'}}></div>
           {id_Dye === localStorage.getItem("ActiveDyeId") && (
             <>
-              <Button variant="primary" onClick={handleConfirmSend}>
+              <Button variant="primary" style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}} onClick={handleConfirmSend}>
                 Отправить
               </Button>
-              <Button style={{ marginLeft: '70%' }} variant="danger" onClick={handleDeleteCart}>
+              <Button style={{ marginLeft: '70%',color: '#dc3545', backgroundColor: '#fff', borderColor: '#dc3545'}}variant="danger"  onClick={handleDeleteCart}>
                 Очистить корзину
               </Button>
             </>
@@ -215,7 +233,7 @@ const BasketPage: React.FC = () => {
           <p></p>
         ) : (
           <>
-            {cartItems?.length > 0 ? renderCart() : renderEmptyCart()}
+            {cartItems?.length > 0 ? renderCart() : (role === 2 ? navigate('/RIP_frontend/AdminMainPage') : navigate('/RIP_frontend'))}
           </>
         )}
       </div>

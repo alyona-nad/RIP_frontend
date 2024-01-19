@@ -8,7 +8,7 @@ import Table from 'react-bootstrap/Table';
 import { Form, Button, Modal } from 'react-bootstrap';
 import { ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
-import {setActiveDyeID, SetFilter,setNumOfColInDye } from '../../redux/filterAndActiveDyeID/actions';
+import {/*setActiveDyeID,*/ SetSearchFilter,setNumOfColInDye } from '../../redux/filterAndActiveDyeID/actions';
 import { loginSuccess, setRole } from '../../redux/auth/authSlice';
 import axios from 'axios';
 import CartImg from '../../assets/NotEmpty.jpg';
@@ -30,9 +30,9 @@ interface Data {
 const AdminMainPage: React.FC = () => {
     const [data, setData] = useState<Data | null>({ Dyes: 0, Colorants: [] });
     const dispatch = useDispatch();
-    const Filter = useSelector((state: RootState) => state.filterAndActiveId.Filter);
-    const activeDye = useSelector((state: RootState) => state.filterAndActiveId.activeDyeID);
-    console.log(activeDye)
+    const SearchFilter = useSelector((state: RootState) => state.filterAndActiveId.SearchFilter);
+    //const activeDye = useSelector((state: RootState) => state.filterAndActiveId.activeDyeID);
+    //console.log(activeDye)
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
     const [loading, setLoading] = useState(true);
     const numOfCol = useSelector((state: RootState) => state.filterAndActiveId.numOfCol);
@@ -64,9 +64,9 @@ const AdminMainPage: React.FC = () => {
 
       
     const fetchData = async () => {
-        console.log(Filter)
+        console.log(SearchFilter)
         try {
-            const url = Filter ? `/api/list_of_colorants?filterValue=${Filter}` 
+            const url = SearchFilter ? `/api/list_of_colorants?filterValue=${SearchFilter}` 
       : `/api/list_of_colorants`;
             let response
             if (!localStorage.getItem("accessToken")) {
@@ -81,7 +81,7 @@ const AdminMainPage: React.FC = () => {
             }
             const result = response?.data;
             localStorage.setItem("ActiveDyeId", result?.Dyes?.toString() || '');
-      dispatch(setActiveDyeID(result?.Dyes));
+      //dispatch(setActiveDyeID(result?.Dyes));
             console.log(result);
             setData(result);
             setLoading(false);
@@ -108,7 +108,7 @@ const AdminMainPage: React.FC = () => {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         //const maxPriceString = e.target.value !== '' ? parseInt(e.target.value).toString() : '';
-        dispatch(SetFilter(e.target.value));
+        dispatch(SetSearchFilter(e.target.value));
     };
 
     useEffect(() => {
@@ -123,8 +123,8 @@ const AdminMainPage: React.FC = () => {
         if (updatedNumOfCol != numOfCol) {
             dispatch(setNumOfColInDye(updatedNumOfCol));
         }
-      }, [dispatch, Filter]);
-      console.log('activeDye:', activeDye);
+      }, [dispatch, SearchFilter]);
+      console.log('activeDye:', localStorage.getItem("ActiveDyeId"));
 
     return (
         <div>
@@ -135,20 +135,37 @@ const AdminMainPage: React.FC = () => {
       </div>
                
                 <div className="filter" style={{ display: 'flex', alignItems: 'center' }}></div>
-                    <Form.Control type="search"  className="me-2" aria-label="Search" value={Filter} onChange={handleChange}>
+                    <Form.Control type="search"  className="me-2" aria-label="Search" value={SearchFilter} onChange={handleChange}>
                 </Form.Control>
                 
                 { isAuthenticated ? (
   loading ? (
     <p></p>
   ) : (
-    <Link className='cart' to={`/RIP_frontend/BasketPage/${activeDye}`} style={{ marginLeft: 'auto' }}>
+    
+    /*<Link className='cart' to={`/RIP_frontend/BasketPage/${activeDye}`} style={{ marginLeft: 'auto' }}>
       {activeDye ? (
         <img src={CartImg} style={{ width: '50px', height: '50px' }} />
       ) : (
         <img src={EmptyCartImg} style={{ width: '50px', height: '50px' }} />
       )}
-    </Link>
+      </Link>*/
+      <Link className='cart' to={/*activeDye && activeDye>0*/localStorage.getItem("ActiveDyeId") && localStorage.getItem("ActiveDyeId")!="0" ? `/RIP_frontend/BasketPage/${localStorage.getItem("ActiveDyeId")}` : '#'}
+              style={{ marginLeft: 'auto' }}
+              onClick={() => {
+                if (/*!activeDye || activeDye===0*/!localStorage.getItem("ActiveDyeId") || localStorage.getItem("ActiveDyeId")==="0") {
+                  // Если нет активной краски, перенаправляем на другую страницу (например, главную)
+                  console.log('Пустая корзина')
+                  //navigate('/RIP_frontend/');
+                }
+              }}
+            >
+              {/*activeDye && activeDye>0*/localStorage.getItem("ActiveDyeId") && localStorage.getItem("ActiveDyeId")!="0" ? (
+                <img src={CartImg} style={{ width: '50px', height: '50px' }} />
+              ) : (
+                <img src={EmptyCartImg} style={{ width: '50px', height: '50px' }} />
+              )}
+            </Link>
   )
 ) : null}
             </div>
@@ -178,21 +195,21 @@ const AdminMainPage: React.FC = () => {
                 <td>{(item.Status)}</td>
                 <td>
                                 {item.Status === 'Действует' && (
-                                    <Button variant="primary" onClick={() => { handleAdd(item.ID_Colorant) }}>
+                                    <Button variant="primary" style={{ color: '#28a745', backgroundColor: '#ececec', borderColor: '#28a745'}} onClick={() => { handleAdd(item.ID_Colorant) }}>
                                         Добавить
                                     </Button>
                                 )}
                             </td>
                                     <td>
                                         <Link to={`/RIP_frontend/colorant-edition/${item.ID_Colorant}/`}>
-                                        <Button variant="primary">
+                                        <Button variant="primary" style={{ color: '#007bff', backgroundColor: '#ececec', borderColor: '#007bff'}}>
                                             Редактировать
                                         </Button>
                                         </Link>
                                     </td>
                                     <td>
                                     {item.Status === 'Действует' && (
-                                        <Button variant="danger" onClick={() => { handleDelete(item.ID_Colorant) }}>
+                                        <Button variant="danger" style={{ color: '#dc3545', backgroundColor: '#ececec', borderColor: '#dc3545'}} onClick={() => { handleDelete(item.ID_Colorant) }}>
                                         Удалить
                                     </Button>
                                     )}</td>
@@ -202,7 +219,7 @@ const AdminMainPage: React.FC = () => {
                     </Table>
                     </div>
                     <Link className='add-colorant' to={"/RIP_frontend/colorant-creation"}>
-                    <Button variant="primary">
+                    <Button variant="primary" style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}}>
                                             Добавить
                                         </Button>
                     </Link>

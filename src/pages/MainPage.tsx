@@ -10,7 +10,7 @@ import CartImg from '../assets/NotEmpty.jpg';
 import EmptyCartImg from '../assets/Empty.png';
 import { loginSuccess, loginFailure, setRole } from '../redux/auth/authSlice';
 import { ChangeEvent } from 'react';
-import { setActiveDyeID, SetFilter, setNumOfColInDye } from '../redux/filterAndActiveDyeID/actions';
+import { /*setActiveDyeID,*/ SetSearchFilter, setNumOfColInDye } from '../redux/filterAndActiveDyeID/actions';
 import { RootState } from '../redux/store';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -24,10 +24,11 @@ const MainPage: FC = () => {
   const dispatch = useDispatch();
   //const [currentFilter, setCurrentFilter] = useState('');
   const numOfCol = useSelector((state: RootState) => state.filterAndActiveId.numOfCol);
-  const Filter = useSelector((state: RootState) => state.filterAndActiveId.Filter);
-  const activeDye = useSelector((state: RootState) => state.filterAndActiveId.activeDyeID);
+  const SearchFilter = useSelector((state: RootState) => state.filterAndActiveId.SearchFilter);
+  //const activeDye = useSelector((state: RootState) => state.filterAndActiveId.activeDyeID);
   const navigate = useNavigate();
-  console.log(activeDye)
+  //const ActiveDyeId= useState(Number);
+ // console.log(activeDye)
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   //const userRole = useSelector((state: RootState) => state.auth.role)
 /*
@@ -60,7 +61,7 @@ const MainPage: FC = () => {
 
 const fetchDataAndCheckActiveDye = async () => {
   fetchData(); // Здесь только вызов fetchData
-  if (!activeDye) {
+  if (/*!activeDye || activeDye===0*/!localStorage.getItem("ActiveDyeId") || localStorage.getItem("ActiveDyeId")==="0") {
     // Если нет активной краски, перенаправляем на другую страницу (например, главную)
     navigate('/RIP_frontend/');
   }
@@ -91,7 +92,7 @@ const handleAdd = async (id: number) => {
     console.error('Ошибка при добавлении:', error);
   }
 };
-/*
+
 useEffect(() => {
   fetchDataAndCheckActiveDye(); // Здесь только вызов fetchDataAndCheckActiveDye
   if (window.localStorage.getItem("accessToken")) {
@@ -104,38 +105,14 @@ useEffect(() => {
   if (updatedNumOfCol !== numOfCol) {
     dispatch(setNumOfColInDye(updatedNumOfCol));
   }
-}, [dispatch, numOfCol, Filter]);
-*/
-useEffect(() => {
-  const fetchDataIfNeeded = async () => {
-    if (window.localStorage.getItem("accessToken")) {
-      dispatch(loginSuccess());
-    }
+}, [dispatch, numOfCol, SearchFilter]);
 
-    const currentNumOfCol = localStorage.getItem('numOfCol');
-    const currentNum = currentNumOfCol ? parseInt(currentNumOfCol, 10) : 0;
-    const updatedNumOfCol = currentNum;
-    localStorage.setItem('numOfCol', updatedNumOfCol.toString());
 
-    if (updatedNumOfCol !== numOfCol) {
-      dispatch(setNumOfColInDye(updatedNumOfCol));
-    }
-
-    // Проверяем, загружались ли данные ранее
-    if (!dataLoaded) {
-      fetchData();
-      setDataLoaded(true); // Устанавливаем, что данные загружены
-    }
-  };
-
-  fetchDataIfNeeded(); // Здесь вызывается fetchDataIfNeeded
-
-}, [dispatch, numOfCol, dataLoaded]);
 
 const fetchData = async () => {
-  console.log(Filter)
+  console.log(localStorage.getItem("ActiveDyeId"))
   try {
-      const url = Filter ? `${API_BASE_URL}/list_of_colorants?filterValue=${Filter}` 
+      const url = SearchFilter ? `${API_BASE_URL}/list_of_colorants?filterValue=${SearchFilter}` 
       : `${API_BASE_URL}/list_of_colorants`;
       
       let response
@@ -155,8 +132,9 @@ const fetchData = async () => {
 
 
       const result = await response.json();
+      //ActiveDyeId=result?.Dyes
       localStorage.setItem("ActiveDyeId", result?.Dyes?.toString() || '');
-      dispatch(setActiveDyeID(result?.Dyes));
+      //dispatch(setActiveDyeID(result?.Dyes));
       setMusic(result.Colorants);
       setLoading(false);
   } catch (error) {
@@ -165,7 +143,7 @@ const fetchData = async () => {
 };
 
 const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
-  dispatch(SetFilter(e.target.value));
+  dispatch(SetSearchFilter(e.target.value));
 };
 
 /*useEffect(() => {
@@ -207,7 +185,7 @@ useEffect(() => {
         <Link to="/RIP_frontend/">Каталог</Link>
       </div>
       <div className="filter" style={{ display: 'flex', alignItems: 'center' }}>
-      <Form.Control type="search"  className="me-2" aria-label="Search" value={Filter} onChange={handleFilterChange}>
+      <Form.Control type="search"  className="me-2" aria-label="Search" value={SearchFilter} onChange={handleFilterChange}>
                 </Form.Control>
       {isAuthenticated ? (
           loading ? (
@@ -215,16 +193,17 @@ useEffect(() => {
           ) : (
             <Link
               className='cart'
-              to={activeDye ? `/RIP_frontend/BasketPage/${activeDye}` : '#'}
+              to={/*activeDye && activeDye>0 */ localStorage.getItem("ActiveDyeId") && localStorage.getItem("ActiveDyeId")!="0" ? `/RIP_frontend/BasketPage/${localStorage.getItem("ActiveDyeId")}` : '#'}
               style={{ marginLeft: 'auto' }}
               onClick={() => {
-                if (!activeDye) {
+                if (/*!activeDye || activeDye===0*/ !localStorage.getItem("ActiveDyeId") || localStorage.getItem("ActiveDyeId")==="0") {
                   // Если нет активной краски, перенаправляем на другую страницу (например, главную)
-                  navigate('/RIP_frontend/');
+                  console.log('Пустая корзина')
+                  //navigate('/RIP_frontend/');
                 }
               }}
             >
-              {activeDye ? (
+              {/*activeDye && activeDye>0*/localStorage.getItem("ActiveDyeId") && localStorage.getItem("ActiveDyeId")!="0" ? (
                 <img src={CartImg} style={{ width: '50px', height: '50px' }} />
               ) : (
                 <img src={EmptyCartImg} style={{ width: '50px', height: '50px' }} />
@@ -237,7 +216,7 @@ useEffect(() => {
       <div className="card" style={{ width: '1220px', boxSizing: 'border-box', marginTop: '10px', marginLeft: 0, marginRight: 0 }}>
         <Row xs={4} md={4} className="g-4">
           {music.map((item, index) => (
-            <Col key={index}>
+            <Col key={index} style={{ minWidth: '210px'}}>
               <MusicCard {...item} onAdd={handleAdd} />
             </Col>
           ))}

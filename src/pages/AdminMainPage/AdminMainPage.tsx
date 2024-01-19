@@ -5,7 +5,7 @@ import { RootState } from '../../redux/store';
 //import Navbar from '../../widgets/Navbar/Navbar';
 import Loader from '../../components/Loader';
 import Table from 'react-bootstrap/Table';
-import { Form, Button, Modal } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import {/*setActiveDyeID,*/ SetSearchFilter,setNumOfColInDye } from '../../redux/filterAndActiveDyeID/actions';
@@ -107,7 +107,6 @@ const AdminMainPage: React.FC = () => {
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        //const maxPriceString = e.target.value !== '' ? parseInt(e.target.value).toString() : '';
         dispatch(SetSearchFilter(e.target.value));
     };
 
@@ -143,13 +142,6 @@ const AdminMainPage: React.FC = () => {
     <p></p>
   ) : (
     
-    /*<Link className='cart' to={`/RIP_frontend/BasketPage/${activeDye}`} style={{ marginLeft: 'auto' }}>
-      {activeDye ? (
-        <img src={CartImg} style={{ width: '50px', height: '50px' }} />
-      ) : (
-        <img src={EmptyCartImg} style={{ width: '50px', height: '50px' }} />
-      )}
-      </Link>*/
       <Link className='cart' to={/*activeDye && activeDye>0*/localStorage.getItem("ActiveDyeId") && localStorage.getItem("ActiveDyeId")!="0" ? `/RIP_frontend/BasketPage/${localStorage.getItem("ActiveDyeId")}` : '#'}
               style={{ marginLeft: 'auto' }}
               onClick={() => {
@@ -168,6 +160,11 @@ const AdminMainPage: React.FC = () => {
             </Link>
   )
 ) : null}
+ <Link to="/RIP_frontend/" className='cart' style={{ marginLeft: '10px' }}>
+            <Button variant="primary" style={{ color: '#007bff', backgroundColor: '#fff', borderColor: '#007bff' }}>
+              Красители карточками
+            </Button>
+          </Link>
             </div>
             {!data || data?.Colorants.length === 0 ? <Loader />
                 : <div style={{ margin: '5% 10% 0 10%' }}>

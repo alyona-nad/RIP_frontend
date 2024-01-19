@@ -8,12 +8,13 @@ interface Props {
     ID_Colorant: number
     Link:string
     Description:string
+    Status:string
     onAdd: (ID_Colorant: number) => void
 }
 
 
 
-const MusicCard: React.FC<Props> = ({ Name, Image, ID_Colorant, onAdd }) => (
+const MusicCard: React.FC<Props> = ({ Name, Status, Image, ID_Colorant, onAdd }) => (
     <Card className="containernew">
       <div className='card'>
       <Link to={`/RIP_frontend/${ID_Colorant}`}>
@@ -21,9 +22,10 @@ const MusicCard: React.FC<Props> = ({ Name, Image, ID_Colorant, onAdd }) => (
   <h3>{Name}</h3>
 </Link>
       </div>
-      {window.localStorage.getItem("accessToken") ? (
+      {Status === 'Действует' && window.localStorage.getItem("accessToken") ? (
+        
               <Button variant="primary" style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}} onClick={() => onAdd(ID_Colorant)}>Добавить</Button>
-            ) : null}
+      ) : null}
     </Card>
   )
   

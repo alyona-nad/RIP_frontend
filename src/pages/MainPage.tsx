@@ -2,7 +2,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import MusicCard from '../components/ColorantCard/ColorantCard.tsx';
-import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IColorant, colorants as Colorants } from "../model.tsx";
@@ -14,6 +13,7 @@ import { /*setActiveDyeID,*/ SetSearchFilter, setNumOfColInDye } from '../redux/
 import { RootState } from '../redux/store';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
 
 const API_BASE_URL = "/api";
 
@@ -29,6 +29,7 @@ const MainPage: FC = () => {
   const navigate = useNavigate();
   //const ActiveDyeId= useState(Number);
  // console.log(activeDye)
+ const role = useSelector((state: RootState) => state.auth.role)
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   //const userRole = useSelector((state: RootState) => state.auth.role)
 /*
@@ -146,37 +147,6 @@ const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
   dispatch(SetSearchFilter(e.target.value));
 };
 
-/*useEffect(() => {
-  fetchData()
-  if (window.localStorage.getItem("accessToken")) {
-      dispatch(loginSuccess())
-  }
-  const currentNumOfCol = localStorage.getItem('numOfCol');
-  const currentNum = currentNumOfCol ? parseInt(currentNumOfCol, 10) : 0;
-  const updatedNumOfCol = currentNum;
-  localStorage.setItem('numOfCol', updatedNumOfCol.toString());
-  if (updatedNumOfCol != numOfCol) {
-      dispatch(setNumOfColInDye(updatedNumOfCol));
-  }
-}, [dispatch, Filter]);*/
-/*
-useEffect(() => {
-  if (window.localStorage.getItem("accessToken")) {
-    dispatch(loginSuccess());
-  }
-
-  const currentNumOfCol = localStorage.getItem('numOfCol');
-  const currentNum = currentNumOfCol ? parseInt(currentNumOfCol, 10) : 0;
-  const updatedNumOfCol = currentNum;
-  localStorage.setItem('numOfCol', updatedNumOfCol.toString());
-
-  if (updatedNumOfCol !== numOfCol) {
-    dispatch(setNumOfColInDye(updatedNumOfCol));
-  }
-
-  fetchData(); // Вызывать fetchData только при монтировании
-
-}, [dispatch, numOfCol, Filter]);*/
 
 
   return (
@@ -213,6 +183,13 @@ useEffect(() => {
 ) : null}
 
       </div>
+      {role === 2 && ( // Добавлен блок для проверки роли
+              <Link to="/RIP_frontend/AdminMainPage" className='cart' style={{ marginLeft: '10px' }}>
+                <Button variant="primary" style={{ color: '#007bff', backgroundColor: '#fff', borderColor: '#007bff' }}>
+                  Красители табличкой
+                </Button>
+              </Link>
+            )}
       <div className="card" style={{ width: '1220px', boxSizing: 'border-box', marginTop: '10px', marginLeft: 0, marginRight: 0 }}>
         <Row xs={4} md={4} className="g-4">
           {music.map((item, index) => (

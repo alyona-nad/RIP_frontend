@@ -11,9 +11,7 @@ function BasicExample() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="w-100 d-flex justify-content-center ">
           <Nav className="me-auto">
-            <Nav.Link href="#home" className="li mx-3" style={{flex:"1"}}>Главная</Nav.Link>
             <Nav.Link href="/RIP_frontend/" className="li mx-3" style={{flex:"1"}}>Каталог</Nav.Link>
-            <Nav.Link href="#link" className="li mx-3" style={{flex:"1"}}>Контакты</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -41,7 +41,10 @@ const authMiddleware: Middleware = (store) => (next) => async (action) => {
     } else if (logout.match(action)) {
         try {
             // Отправить запрос на сервер для выполнения выхода
-            const response = await axios.get(`${API_BASE_URL}/auth/logout`, {
+            const response = await axios.post(
+                `${API_BASE_URL}/auth/logout`,
+                {},
+                {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                 },

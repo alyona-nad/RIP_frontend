@@ -1,4 +1,8 @@
 import image from "./model/Chrom.jpg"
+import image_gum from "./model/gummiarabik.jpg"
+import image_titan from "./model/dioksid_titan.png"
+import image_mrg from "./model/marganec.jpg"
+import image_ferrum from "./model/ferrum.png"
 export interface IColorant {
     Name: string
     Image: string
@@ -22,7 +26,7 @@ export const colorants: IColorant[] = [
     {
         "ID_Colorant": 2,
         "Name": "Гуммиарабик",
-        "Image": "http://localhost:9000/ripnew/colorants/2/image",
+        "Image": image_gum,
         "Link": "/product/2",
         "Description": "Твёрдая прозрачная смола, состоящая из высохшего сока различных видов акаций.",
         "Properties": "Вязкая жидкость, затвердевающая на воздухе. Гуммиарабик хорошо растворяется в тёплой воде (в холодной намного хуже) с образованием клейкого слабокислого раствора.",
@@ -31,7 +35,7 @@ export const colorants: IColorant[] = [
     {
         "ID_Colorant": 3,
         "Name": "Диоксид титана",
-        "Image": "http://127.0.0.1:9000/rip1/TiO2.jpg",
+        "Image": image_titan,
         "Link": "/product/3",
         "Description": "Чистый диоксид титана — бесцветные кристаллы (желтеет при нагревании). Для технических целей применяется в раздробленном состоянии, представляя собой белый порошок. Не растворяется в воде и разбавленных минеральных кислотах (за исключением плавиковой).",
         "Properties": "Плотность: 4,235 г/см3\\n/nТемпература плавления: 1843°C Температура кипения: 2972°C<br> Растворимость в воде: не растворяется<br>Температура разложения: 2900°C",
@@ -40,7 +44,7 @@ export const colorants: IColorant[] = [
     {
         "ID_Colorant": 4,
         "Name": "Оксид(III) железа",
-        "Image": "http://localhost:9000/ripnew/colorants/4/image",
+        "Image": image_ferrum
         "Link": "/product/4",
         "Description": "Амфотерный оксид с большим преобладанием основных свойств. Красно-коричневого цвета. Термически устойчив до высоких температур. Образуется при сгорании железа на воздухе. Не реагирует с водой. Медленно реагирует с кислотами и щелочами.",
         "Properties": "Плотность:\t5,242 г/см3 Температура плавления:\t1566°C Растворимость в воде:\tнерастворим",
@@ -49,7 +53,7 @@ export const colorants: IColorant[] = [
     {
         "ID_Colorant": 5,
         "Name": "Оксид(IV) марганца",
-        "Image": "http://localhost:9000/ripnew/colorants/5/image",
+        "Image": image_mrg,
         "Link": "/product/5",
         "Description": "Неорганическое твердое соединение марганца и кислорода, состоящее из черных/серо-стальных тетрагональных мелких кристаллов. Цвет данного вещества – бурый/темно-коричневый.",
         "Properties": "Плотность 5,026 г/см³. Термические свойства вещества характеризуются температурой разложения 535 °C. В воде не растворяется. Из всех соединений марганца самое устойчивое.",

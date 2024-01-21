@@ -419,7 +419,7 @@ const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
       </div>
       {role === 2 && ( // Добавлен блок для проверки роли
               <Link to="/RIP_frontend/AdminMainPage" className='cart' style={{ marginLeft: '10px' }}>
-                <Button variant="primary" style={{ color: '#007bff', backgroundColor: '#fff', borderColor: '#007bff' }}>
+                <Button variant="primary" /*style={{ color: '#007bff', backgroundColor: '#fff', borderColor: '#007bff' }}*/style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}}>
                   Красители табличкой
                 </Button>
               </Link>

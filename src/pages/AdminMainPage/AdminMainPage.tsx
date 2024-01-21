@@ -305,7 +305,7 @@ const AdminMainPage: React.FC = () => {
                 });
             }
             const result = response?.data;
-            //localStorage.setItem("ActiveDyeId", result?.Dyes?.toString() || '');
+            localStorage.setItem("ActiveDyeId", result?.Dyes?.toString() || '');
       //dispatch(setActiveDyeID(result?.Dyes));
             console.log(result);
             setData(result);
@@ -386,7 +386,7 @@ const AdminMainPage: React.FC = () => {
   )
 ) : null}
  <Link to="/RIP_frontend/" className='cart' style={{ marginLeft: '10px' }}>
-            <Button variant="primary" style={{ color: '#007bff', backgroundColor: '#fff', borderColor: '#007bff' }}>
+            <Button variant="primary" /*style={{ color: '#007bff', backgroundColor: '#fff', borderColor: '#007bff' }}*/style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}}>
               Красители карточками
             </Button>
           </Link>
@@ -417,21 +417,21 @@ const AdminMainPage: React.FC = () => {
                 <td>{(item.Status)}</td>
                 <td>
                                 {item.Status === 'Действует' && (
-                                    <Button variant="primary" style={{ color: '#28a745', backgroundColor: '#ececec', borderColor: '#28a745'}} onClick={() => { handleAdd(item.ID_Colorant) }}>
+                                    <Button variant="primary" /*style={{ color: '#28a745', backgroundColor: '#ececec', borderColor: '#28a745'}}*/style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}} onClick={() => { handleAdd(item.ID_Colorant) }}>
                                         Добавить
                                     </Button>
                                 )}
                             </td>
                                     <td>
                                         <Link to={`/RIP_frontend/colorant-edition/${item.ID_Colorant}/`}>
-                                        <Button variant="primary" style={{ color: '#007bff', backgroundColor: '#ececec', borderColor: '#007bff'}}>
+                                        <Button variant="primary" /*style={{ color: '#007bff', backgroundColor: '#ececec', borderColor: '#007bff'}}*/style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}}>
                                             Редактировать
                                         </Button>
                                         </Link>
                                     </td>
                                     <td>
                                     {item.Status === 'Действует' && (
-                                        <Button variant="danger" style={{ color: '#dc3545', backgroundColor: '#ececec', borderColor: '#dc3545'}} onClick={() => { handleDelete(item.ID_Colorant) }}>
+                                        <Button variant="danger" /*style={{ color: '#dc3545', backgroundColor: '#ececec', borderColor: '#dc3545'}}*/style={{ color: '#fff', backgroundColor: '#dc3545', borderRadius:'0'}} onClick={() => { handleDelete(item.ID_Colorant) }}>
                                         Удалить
                                     </Button>
                                     )}</td>
@@ -441,7 +441,7 @@ const AdminMainPage: React.FC = () => {
                     </Table>
                     </div>
                     <Link className='add-colorant' to={"/RIP_frontend/colorant-creation"}>
-                    <Button variant="primary" style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}}>
+                    <Button variant="primary" /*style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}}*/style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}}>
                                             Добавить
                                         </Button>
                     </Link>

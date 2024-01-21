@@ -232,7 +232,8 @@ const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           <Button
             className="filter-button"
             variant="primary"
-            style={{ color: '#007bff', backgroundColor: '#fff', borderColor: '#007bff'}}
+            /*style={{ //color: '#007bff', backgroundColor: '#fff', borderColor: '#007bff'}}*/
+            style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}}
             onClick={() => {
               handleResetFilter();
             }}
@@ -291,7 +292,8 @@ const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                         <td>
                           <Button
                             variant="primary"
-                            style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}}
+                            /*style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}}*/
+                            style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}}
                             onClick={() => {
                               handleChangeStatus(dye.ID_Dye, 'ended');
                             }}
@@ -302,7 +304,8 @@ const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                         <td>
                           <Button
                             variant="danger"
-                            style={{ color: '#dc3545', backgroundColor: '#fff', borderColor: '#dc3545'}}
+                            /*style={{ color: '#dc3545', backgroundColor: '#fff', borderColor: '#dc3545'}}*/
+                            style={{ color: '#fff', backgroundColor: '#dc3545', borderRadius:'0'}}
                             onClick={() => {
                               handleChangeStatus(dye.ID_Dye, 'reject');
                             }}

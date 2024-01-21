@@ -21,7 +21,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onRemove }) => {
         <td>{item.Name}</td>
         <td>{item.Price}</td>
         <td>
-          <Button variant="danger" onClick={handleRemove}>
+          <Button variant="danger" style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}} onClick={handleRemove}>
             Удалить
           </Button>
         </td>

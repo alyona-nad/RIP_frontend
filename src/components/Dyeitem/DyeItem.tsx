@@ -21,7 +21,7 @@ const DyeCard: FC<Props> = ({ Name, Image, ID_Colorant, onRemove, isMatchingId }
         
       </div>
       {isMatchingId && window.localStorage.getItem("accessToken") ? (
-        <Button variant="primary"  style={{ color: '#dc3545', backgroundColor: '#fff', borderColor: '#dc3545'}} onClick={() => onRemove(ID_Colorant)}>Удалить</Button>
+        <Button variant="danger"  /*style={{ color: '#dc3545', backgroundColor: '#fff', borderColor: '#dc3545'}}*/style={{ color: '#fff', backgroundColor: '#dc3545', borderRadius:'0'}} onClick={() => onRemove(ID_Colorant)}>Удалить</Button>
       ) : null}
   </Card>
 )

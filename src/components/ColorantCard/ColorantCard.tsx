@@ -24,7 +24,7 @@ const MusicCard: React.FC<Props> = ({ Name, Status, Image, ID_Colorant, onAdd })
       </div>
       {Status === 'Действует' && window.localStorage.getItem("accessToken") ? (
         
-              <Button variant="primary" style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}} onClick={() => onAdd(ID_Colorant)}>Добавить</Button>
+              <Button variant="primary" /*style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}}*/style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}} onClick={() => onAdd(ID_Colorant)}>Добавить</Button>
       ) : null}
     </Card>
   )

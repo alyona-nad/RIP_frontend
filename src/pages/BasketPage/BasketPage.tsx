@@ -436,10 +436,10 @@ const BasketPage: React.FC = () => {
         <div style={{ marginTop: '10px'}}></div>
           {id_Dye === localStorage.getItem("ActiveDyeId") && (
             <>
-              <Button variant="primary" style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}} onClick={handleConfirmSend}>
+              <Button variant="primary" /*style={{ color: '#28a745', backgroundColor: '#fff', borderColor: '#28a745'}}*/style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}} onClick={handleConfirmSend}>
                 Отправить
               </Button>
-              <Button style={{ marginLeft: '70%',color: '#dc3545', backgroundColor: '#fff', borderColor: '#dc3545'}}variant="danger"  onClick={handleDeleteCart}>
+              <Button /*style={{ marginLeft: '70%',color: '#dc3545', backgroundColor: '#fff', borderColor: '#dc3545'}}*/ style={{ marginLeft: '70%',color: '#fff', backgroundColor: '#dc3545', borderRadius:'0'}}variant="danger"  onClick={handleDeleteCart}>
                 Очистить корзину
               </Button>
             </>

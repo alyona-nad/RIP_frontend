@@ -108,7 +108,7 @@ const CreateColorant = () => {
                     </Form.Group>
                 </Form>
                 {error && <div className="error-message">{error}</div>}
-                <Button variant="primary" onClick={() => handleEdit(name, description, properties,status)}>
+                <Button variant="primary" style={{ color: '#fff', backgroundColor: '#118bd4', borderRadius:'0'}}  onClick={() => handleEdit(name, description, properties,status)}>
                     Создать
                 </Button>
             </div>

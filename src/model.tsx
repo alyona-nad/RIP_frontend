@@ -1,3 +1,4 @@
+import image from "./model/Chrom.jpg"
 export interface IColorant {
     Name: string
     Image: string
@@ -12,7 +13,7 @@ export const colorants: IColorant[] = [
     {
         "ID_Colorant": 6,
         "Name": "Оксид(III) хрома",
-        "Image": "http://127.0.0.1:9000/rip1/Cr2O3.jpg",
+        "Image": image,
         "Link": "/product/6",
         "Description": "Оксид хрома — неорганическое соединение, используемое в керамике в качестве зеленого красителя. Химическая формула оксида хрома — Cr2O3, а оксид хрома доступен в виде порошка.",
         "Properties": "Температура плавления 2435 °C, кипения ок. 4000 °C. Плотность 5,21 г/см³ (из иностранных источников 5,23 г/см³). Нерастворим в воде.",
